@@ -1,7 +1,8 @@
-
 **All Campuses and Students (21/57)**
+
 Backend (Sequelize)
-- [ ] Write a `campuses` model with the following information:
+
+- [] Write a `campuses` model with the following information:
   - [ ] name - not empty or null
   - [ ] imageUrl - with a default value
   - [ ] address - not empty or null
@@ -24,17 +25,20 @@ Backend (Sequelize)
 **Single Student and Single Campus (14/57)**
 
 Backend (Express and Sequelize)
+
 - [ ] Write a route to serve up a single campus (based on its id), _including that campuses' students_
 - [ ] Write a route to serve up a single student (based on their id), _including that student's campus_**
 
 **Adding a Campus and Adding a Student (12/57)**
 
 Backend (Express and Sequelize)
+
 - [ ] Write a route to add a new campus
 - [ ] Write a route to add a new student**
 
 **Removing a Campus and Removing a Student (10/57)**
 
 Backend (Express and Sequelize)
+
 - [ ] Write a route to remove a campus (based on its id)
 - [ ] Write a route to remove a student (based on their id)**
