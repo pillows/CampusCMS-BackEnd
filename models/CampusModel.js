@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const Model = Sequelize.Model
 
+const sequelize = require("../sequelize")
 class Campuses extends Model {}
 
 Campuses.init({
@@ -16,7 +17,7 @@ Campuses.init({
         defaultValue: "https://hunter.cuny.edu",
     },
     address:{
-        type:Sequelize.STRING
+        type:Sequelize.STRING,
         allowNull: false,
         notEmpty: true
     },
