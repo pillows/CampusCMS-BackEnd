@@ -7,11 +7,9 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const routes = require('./src/routes');
 
-app.get('/', function (req, res) {
 
-
-    return res.send("sdsd")
-});
+app.use('/api', routes);
 
 module.exports = app;
