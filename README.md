@@ -15,12 +15,12 @@ Backend (Sequelize)
   - [x] imageUrl - with a default value
   - [x] gpa - decimal between 0.0 and 4.0
 
-- [ ] Students may be associated with at most one campus. Likewise, campuses may be associated with many students
+- [x] Students may be associated with at most one campus. Likewise, campuses may be associated with many students
 
 
 (Express and Sequelize)
-- [ ] Write a route to serve up all students
-- [ ] Write a route to serve up all campuses
+- [x] Write a route to serve up all students
+- [x] Write a route to serve up all campuses
 
 **Single Student and Single Campus (14/57)**
 
