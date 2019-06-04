@@ -1,6 +1,6 @@
 const sequelize = require('../sequelize')
 
-const Student = require("../src/models/StudentModel")(sequelize[0],sequelize[1])
+const Student = require("../src/models/StudentModel")(sequelize[0])
 
 const db = sequelize[0]
 db.sync()
