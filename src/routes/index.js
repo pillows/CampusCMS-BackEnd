@@ -8,4 +8,8 @@ routes.get('/', (req, res) => {
 
 routes.get('/campuses', campuses.all);
 
+routes.get('/students', students.all);
+routes.get('/students/:id', students.find);
+routes.post('/students/create', students.create);
+
 module.exports = routes;
