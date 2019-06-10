@@ -1,6 +1,7 @@
 const sequelize = require('../../sequelize')
 let db = sequelize[0]
 const Student = require("../../src/models/StudentModel")(db)
+const EnrolledAt = require("../../src/models/EnrolledAtModel")(db)
 
 // Read of CRUD
 let allStudents = (req, res) => {
@@ -28,6 +29,8 @@ let createStudent = (req, res) => {
     let email = req.body.email
     let imageUrl = req.body.imageUrl
     let gpa = req.body.gpa
+    let schoolId = req.body.schoolId
+
 
 
     db.sync()
@@ -39,6 +42,7 @@ let createStudent = (req, res) => {
         gpa:gpa
     }))
     .then(student => {
+        addStudent(student.id, firstName, lastName, schoolId)
         res.status(200).json(student);
     });
 
@@ -80,12 +84,42 @@ let updateStudent = (req, res) => {
     });
 }
 
+let addStudent = (studentId, firstName, lastName, campusId) => {
+
+    db.sync()
+    .then(()=> EnrolledAt.create({
+        studentId,
+        firstName,
+        lastName,
+        campusId
+    }))
+    .then(enrolled => {
+        res.status(200).json(enrolled);
+    });
+}
+
+let changeEnrolledSchool = (studentId, campusId) => {
+
+    db.sync()
+    .then(()=>EnrolledAt.update({
+        studentId,
+        campusId
+
+    },{
+        where:{
+            studentIdxw
+        }
+    })).then(enrolled => {
+        res.status(200).json(enrolled);
+    });
+}
+
 let routes = {
     all: allStudents,
     find: findStudent,
     create: createStudent,
     delete: deleteStudent,
-    update: updateStudent
+    update: updateStudent,
 }
 
 module.exports = routes

@@ -3,10 +3,11 @@ let db = sequelize[0]
 const Campus = require("../../src/models/CampusModel")(db)
 
 let allCampuses = (req, res) => {
-    Campus.findAll().then(campus => {
+    db.sync()
+    .then(()=> Campus.findAll().then(campus => {
         res.status(200).json(campus);
       // projects will be an array of all Project instances
-    })
+    }))
 
 };
 
@@ -39,11 +40,12 @@ let createCampus = (req, res) => {
 
 let deleteCampus = (req, res) => {
 	let id = req.body.id
-    Campus.destroy({
+    db.sync()
+    .then(()=> Campus.destroy({
         where:{
             id:id
         }
-    }).then(campus => {
+    })).then(campus => {
         res.status(200).json(campus);
     });
 }
@@ -55,7 +57,8 @@ let updateCampus = (req, res) => {
     let address = req.body.address
     let description = req.body.description
 
-    Campus.update({
+    db.sync()
+    .then(()=> Campus.update({
         name,
         imageUrl,
         address,
@@ -66,17 +69,49 @@ let updateCampus = (req, res) => {
         }
     }
 
-    ).then(campus => {
+    )).then(campus => {
         res.status(200).json(campus);
     });
 }
+
+let addStudent = (req, res) => {
+
+	let studentId = req.body.studentId;
+	let campusId = req.body.campusId;
+
+	EnrolledAt.create(
+		{
+			studentId,
+			campusId
+		}
+	)
+
+	db.sync()
+    .then(()=> Campus.create({
+    	firstName,
+    	lastName,
+        studentId,
+		campusId
+    }))
+    .then(campus => {
+        res.status(200).json(campus);
+    });
+}
+
+let removeStudent = (req, res) => {
+
+}
+
+
 
 let routes = {
     all: allCampuses,
     find: findCampus,
     create: createCampus,
     delete: deleteCampus,
-    update: updateCampus
+    update: updateCampus,
+    addStudent:addStudent,
+    removeStudent:removeStudent
 }
 
 module.exports = routes
