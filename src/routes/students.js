@@ -29,6 +29,7 @@ let createStudent = (req, res) => {
     let imageUrl = req.body.imageUrl
     let gpa = req.body.gpa
 
+
     db.sync()
     .then(()=> Student.create({
         firstName:firstName,
@@ -44,14 +45,47 @@ let createStudent = (req, res) => {
 }
 
 let deleteStudent = (req, res) => {
-    res.status(200).send("2");
+    let id = req.body.id
+    Student.destroy({
+        where:{
+            id:id
+        }
+    }).then(student => {
+        res.status(200).json(student);
+    });
+}
+
+let updateStudent = (req, res) => {
+    let id = req.body.id
+    let firstName = req.body.firstName
+    let lastName = req.body.lastName
+    let email = req.body.email
+    let imageUrl = req.body.imageUrl
+    let gpa = req.body.gpa
+
+    Student.update({
+        firstName:firstName,
+        lastName:lastName,
+        email:email,
+        imageUrl:imageUrl,
+        gpa:gpa
+    },{
+        where:{
+            id:id
+        }
+    }
+
+    ).then(student => {
+        res.status(200).json(student);
+    });
 }
 
 let routes = {
     all: allStudents,
     find: findStudent,
     create: createStudent,
-    delete: deleteStudent
+    delete: deleteStudent,
+    update: updateStudent
 }
 
 module.exports = routes
