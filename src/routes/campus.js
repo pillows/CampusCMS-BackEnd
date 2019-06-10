@@ -38,11 +38,37 @@ let createCampus = (req, res) => {
 }
 
 let deleteCampus = (req, res) => {
-
+	let id = req.body.id
+    Campus.destroy({
+        where:{
+            id:id
+        }
+    }).then(campus => {
+        res.status(200).json(campus);
+    });
 }
 
 let updateCampus = (req, res) => {
+	let id = req.body.id
+    let name = req.body.name
+    let imageUrl = req.body.imageUrl
+    let address = req.body.address
+    let description = req.body.description
 
+    Campus.update({
+        name,
+        imageUrl,
+        address,
+        description
+    },{
+        where:{
+            id:id
+        }
+    }
+
+    ).then(campus => {
+        res.status(200).json(campus);
+    });
 }
 
 let routes = {
