@@ -19,7 +19,8 @@ module.exports = function(sequelize) {
         description:{
             type:sequelize.Sequelize.STRING,
             args:[0,500]
-        }
+        },
+        
     },{
         sequelize:sequelize,
         modelName:"campus"

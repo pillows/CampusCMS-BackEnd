@@ -26,19 +26,19 @@ Backend (Sequelize)
 
 Backend (Express and Sequelize)
 
-- [ ] Write a route to serve up a single campus (based on its id), _including that campuses' students_
-- [ ] Write a route to serve up a single student (based on their id), _including that student's campus_**
+- [] Write a route to serve up a single campus (based on its id), _including that campuses' students_
+- [] Write a route to serve up a single student (based on their id), _including that student's campus_**
 
 **Adding a Campus and Adding a Student (12/57)**
 
 Backend (Express and Sequelize)
 
-- [ ] Write a route to add a new campus
-- [ ] Write a route to add a new student**
+- [x] Write a route to add a new campus
+- [x] Write a route to add a new student**
 
 **Removing a Campus and Removing a Student (10/57)**
 
 Backend (Express and Sequelize)
 
-- [ ] Write a route to remove a campus (based on its id)
-- [ ] Write a route to remove a student (based on their id)**
+- [x] Write a route to remove a campus (based on its id)
+- [x] Write a route to remove a student (based on their id)**
