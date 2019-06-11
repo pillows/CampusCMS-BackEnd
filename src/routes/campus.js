@@ -1,6 +1,9 @@
 const sequelize = require('../../sequelize')
 let db = sequelize[0]
+
+const Student = require("../../src/models/StudentModel")(db)
 const Campus = require("../../src/models/CampusModel")(db)
+const EnrolledAt = require("../../src/models/EnrolledAtModel")(db)
 
 let allCampuses = (req, res) => {
     db.sync()
@@ -11,11 +14,26 @@ let allCampuses = (req, res) => {
 
 };
 
+let getStudents = (campusId) => {
+    let students = EnrolledAt.findAll({
+        where: {
+            campusId
+        }
+    })
+
+    return students
+}
 let findCampus = (req, res) => {
 	let campusId = req.params.id
 
     Campus.findByPk(campusId).then(campus => {
-        res.status(200).json(campus);
+
+        getStudents(campusId)
+        .then(students => {
+            campus.dataValues.students = students
+            res.status(200).json(campus);
+        })
+        
     })
 }
 

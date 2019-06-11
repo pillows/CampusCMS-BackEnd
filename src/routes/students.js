@@ -15,10 +15,34 @@ let findStudent = (req, res) => {
     let studentId = req.params.id
 
     Student.findByPk(studentId).then(student => {
-        res.status(200).json(student);
+        getEnrolledCampus(student.id)
+        .then(enrolled => {
+            // console.log(enrolled.campusId);
+            
+            student.dataValues.school = enrolled.campusId
+            // console.log(student);
+
+            // let studentResults = student
+            // console.log(studentResults.dataValues);
+            res.status(200).json(student);
+            // return enrolled.campusId
+        })
+        
     })
 
 };
+
+let getEnrolledCampus = (studentId) => {
+    let campus = EnrolledAt.findOne({
+        where:{
+            studentId
+        }
+    })
+
+    return campus
+
+    // console.log("test", campus);
+}
 
 // Create of CRUD
 let createStudent = (req, res) => {
@@ -93,9 +117,6 @@ let addStudent = (studentId, firstName, lastName, campusId) => {
         lastName,
         campusId
     }))
-    .then(enrolled => {
-        res.status(200).json(enrolled);
-    });
 }
 
 let changeEnrolledSchool = (studentId, campusId) => {
@@ -107,11 +128,9 @@ let changeEnrolledSchool = (studentId, campusId) => {
 
     },{
         where:{
-            studentIdxw
+            studentId
         }
-    })).then(enrolled => {
-        res.status(200).json(enrolled);
-    });
+    }))
 }
 
 let routes = {
