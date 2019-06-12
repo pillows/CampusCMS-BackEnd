@@ -1,4 +1,4 @@
-const sequelize = require('../../sequelize')
+dconst sequelize = require('../../sequelize')
 let db = sequelize[0]
 const Student = require("../../src/models/StudentModel")(db)
 const EnrolledAt = require("../../src/models/EnrolledAtModel")(db)
@@ -119,7 +119,10 @@ let addStudent = (studentId, firstName, lastName, campusId) => {
     }))
 }
 
-let changeEnrolledSchool = (studentId, campusId) => {
+let changeEnrolledSchool = (req, res) => {
+
+    let studentId = req.body.studentId
+    let campusId = req.body.campusId
 
     db.sync()
     .then(()=>EnrolledAt.update({
@@ -139,6 +142,7 @@ let routes = {
     create: createStudent,
     delete: deleteStudent,
     update: updateStudent,
+    changeSchool: changeEnrolledSchool
 }
 
 module.exports = routes
