@@ -12,8 +12,37 @@ routes.post('/campuses/create', campuses.create);
 routes.delete('/campuses/delete', campuses.delete);
 routes.put('/campuses/update', campuses.update)
 
+/*
+Lists all students in record
+
+params:
+n/a
+
+return:
+All student objects in an array
+*/
 routes.get('/students', students.all);
+
+/*
+Display student info by id
+
+params:
+id
+
+return:
+Singular student object
+*/
 routes.get('/students/:id', students.find);
+
+/*
+Creates new student object
+
+params:
+firstName, lastName, email, imageUrl, gpa, schoolId (0 by default)
+
+return:
+Singular student object
+*/
 routes.post('/students/create', students.create);
 
 /*

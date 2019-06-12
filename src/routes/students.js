@@ -1,4 +1,4 @@
-dconst sequelize = require('../../sequelize')
+const sequelize = require('../../sequelize')
 let db = sequelize[0]
 const Student = require("../../src/models/StudentModel")(db)
 const EnrolledAt = require("../../src/models/EnrolledAtModel")(db)

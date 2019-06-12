@@ -18,12 +18,6 @@ module.exports = function(sequelize) {
             notEmpty: true,
             isEmail: true
         },
-        belongsTo:{
-            type:sequelize.Sequelize.STRING,
-            allowNull: false,
-            notEmpty: true,
-            defaultValue: ""
-        },
         imageUrl:{
             type:sequelize.Sequelize.STRING,
             defaultValue: "https://hunter.cuny.edu",
