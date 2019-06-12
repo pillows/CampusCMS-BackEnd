@@ -134,6 +134,8 @@ let changeEnrolledSchool = (req, res) => {
             studentId
         }
     }))
+
+    res.status(200).json({status:"success"});
 }
 
 let routes = {
