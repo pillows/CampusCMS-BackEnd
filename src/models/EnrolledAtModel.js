@@ -5,17 +5,6 @@ module.exports = function(sequelize) {
             allowNull: false,
             notEmpty: true
         },
-        firstName:{
-            type:sequelize.Sequelize.STRING,
-            allowNull: false,
-            notEmpty: true
-
-        },
-        lastName:{
-            type:sequelize.Sequelize.STRING,
-            allowNull: false,
-            notEmpty: true
-        },
         campusId:{
             type:sequelize.Sequelize.INTEGER,
             allowNull: false,
