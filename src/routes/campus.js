@@ -8,6 +8,10 @@ const EnrolledAt = require("../../src/models/EnrolledAtModel")(db)
 let allCampuses = (req, res) => {
     db.sync()
     .then(()=> Campus.findAll().then(campus => {
+        let completeArray = []
+        for(let i = 0; i < campus.length; i++){
+            console.log(campusId)
+        }
         res.status(200).json(campus);
       // projects will be an array of all Project instances
     }))
