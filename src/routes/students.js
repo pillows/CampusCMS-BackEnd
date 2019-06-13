@@ -1,7 +1,6 @@
 const sequelize = require('../../sequelize')
 let db = sequelize[0]
 const Student = require("../../src/models/StudentModel")(db)
-const EnrolledAt = require("../../src/models/EnrolledAtModel")(db)
 
 // Read of CRUD
 let allStudents = (req, res) => {
@@ -32,17 +31,6 @@ let findStudent = (req, res) => {
 
 };
 
-let getEnrolledCampus = (studentId) => {
-    let campus = EnrolledAt.findOne({
-        where:{
-            studentId
-        }
-    })
-
-    return campus
-
-    // console.log("test", campus);
-}
 
 // Create of CRUD
 let createStudent = (req, res) => {
@@ -57,16 +45,15 @@ let createStudent = (req, res) => {
 
 
 
-    db.sync()
-    .then(()=> Student.create({
+    Student.create({
         firstName:firstName,
         lastName:lastName,
         email:email,
         imageUrl:imageUrl,
         gpa:gpa
-    }))
+    })
     .then(student => {
-        addStudent(student.id, firstName, lastName, schoolId)
+        // addStudent(student.id, firstName, lastName, schoolId)
         res.status(200).json(student);
     });
 
@@ -108,34 +95,28 @@ let updateStudent = (req, res) => {
     });
 }
 
-let addStudent = (studentId, firstName, lastName, campusId) => {
-
-    db.sync()
-    .then(()=> EnrolledAt.create({
-        studentId,
-        firstName,
-        lastName,
-        campusId
-    }))
-}
 
 let changeEnrolledSchool = (req, res) => {
 
     let studentId = req.body.studentId
     let campusId = req.body.campusId
+    console.log("student",studentId,"campus", campusId)
+    Student.findOne({
+        where:{id:studentId},
+        raw: true
+    }).then((student) => {
+        console.log(student)
+        student.update({
+            campusId:campusId
+        })
+        res.status(200).json({status:"success"});
 
-    db.sync()
-    .then(()=>EnrolledAt.update({
-        studentId,
-        campusId
+    }).catch((err)=>{
+        console.log(err)
+        res.status(400).json({status:"fuck u"});
+    })
 
-    },{
-        where:{
-            studentId
-        }
-    }))
-
-    res.status(200).json({status:"success"});
+    
 }
 
 let routes = {

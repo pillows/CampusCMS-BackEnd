@@ -1,34 +1,46 @@
-module.exports = function(sequelize) {
+module.exports = studentModel;
+
+const Sequelize = require('sequelize')
+function studentModel(sequelize) {
     // const Campus = require("./CampusModel")(sequelize, Sequelize)
-    let Students = sequelize.define("Students",{
+
+    class Students extends Sequelize.Model {}
+
+    Students.init({
         firstName:{
-            type:sequelize.Sequelize.STRING,
+            type:Sequelize.STRING,
             allowNull: false,
             notEmpty: true
 
         },
         lastName:{
-            type:sequelize.Sequelize.STRING,
+            type:Sequelize.STRING,
             allowNull: false,
             notEmpty: true
         },
         email:{
-            type:sequelize.Sequelize.STRING,
+            type:Sequelize.STRING,
             allowNull: false,
             notEmpty: true,
             isEmail: true
         },
         imageUrl:{
-            type:sequelize.Sequelize.STRING,
+            type:Sequelize.STRING,
             defaultValue: "https://hunter.cuny.edu",
         },
         gpa:{
-            type:sequelize.Sequelize.DOUBLE,
+            type:Sequelize.DOUBLE,
             len: [0.0,4.0]
+        },
+        belongsTo:{
+            type:Sequelize.STRING,
+            notEmpty: true
         }
     },{
-        sequelize:sequelize,
+        sequelize,
         modelName:"students"
-    })
+    });
+
+
     return Students
 }

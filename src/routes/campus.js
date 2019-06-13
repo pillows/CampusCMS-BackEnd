@@ -3,30 +3,33 @@ let db = sequelize[0]
 
 const Student = require("../../src/models/StudentModel")(db)
 const Campus = require("../../src/models/CampusModel")(db)
-const EnrolledAt = require("../../src/models/EnrolledAtModel")(db)
 
 let allCampuses = (req, res) => {
-    db.sync()
-    .then(()=> Campus.findAll().then(campus => {
+    Campus.findAll({
+        raw: true,
+        include:[{model:Student, as:'student'}]
+    }).then(campus => {
         let completeArray = []
-        for(let i = 0; i < campus.length; i++){
-            console.log(campus.id)
-        }
+        // for(let i = 0; i < campus.length; i++){
+
+        //     let studObj = getStudents(campus[i].id)
+            
+        //     campus[i].students = studObj
+        //     completeArray.push(campus)
+        // }
+
+        // let students = Promise.resolve(getStudents(campus[0].id))
+        // let students = getStudents(campus[0].id)
+        // console.log("test", students)
+        // getStudents(campus[0].id).then(students => console.log('Test -->', students))
+        // completeArray
+        
         res.status(200).json(campus);
       // projects will be an array of all Project instances
-    }))
+    })
 
 };
 
-let getStudents = (campusId) => {
-    let students = EnrolledAt.findAll({
-        where: {
-            campusId
-        }
-    })
-
-    return students
-}
 let findCampus = (req, res) => {
 	let campusId = req.params.id
 
@@ -48,13 +51,12 @@ let createCampus = (req, res) => {
     let description = req.body.description
 
 
-    db.sync()
-    .then(()=> Campus.create({
+    Campus.create({
         name,
         imageUrl,
         address,
         description
-    }))
+    })
     .then(campus => {
         res.status(200).json(campus);
     });
@@ -62,12 +64,12 @@ let createCampus = (req, res) => {
 
 let deleteCampus = (req, res) => {
 	let id = req.body.id
-    db.sync()
-    .then(()=> Campus.destroy({
+
+    Campus.destroy({
         where:{
             id:id
         }
-    })).then(campus => {
+    }).then(campus => {
         res.status(200).json(campus);
     });
 }
@@ -79,8 +81,7 @@ let updateCampus = (req, res) => {
     let address = req.body.address
     let description = req.body.description
 
-    db.sync()
-    .then(()=> Campus.update({
+    Campus.update({
         name,
         imageUrl,
         address,
@@ -91,7 +92,7 @@ let updateCampus = (req, res) => {
         }
     }
 
-    )).then(campus => {
+    ).then(campus => {
         res.status(200).json(campus);
     });
 }
@@ -100,21 +101,12 @@ let addStudent = (req, res) => {
 
 	let studentId = req.body.studentId;
 	let campusId = req.body.campusId;
-
-	EnrolledAt.create(
-		{
-			studentId,
-			campusId
-		}
-	)
-
-	db.sync()
-    .then(()=> Campus.create({
+    Campus.create({
     	firstName,
     	lastName,
         studentId,
 		campusId
-    }))
+    })
     .then(campus => {
         res.status(200).json(campus);
     });

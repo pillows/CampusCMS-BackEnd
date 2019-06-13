@@ -9,6 +9,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./src/routes');
 
+
 // Taken from StackOverflow https://stackoverflow.com/a/12008719
 app.use(function (req, res, next) {
 
