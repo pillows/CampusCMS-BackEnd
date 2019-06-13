@@ -10,7 +10,7 @@ let allCampuses = (req, res) => {
     .then(()=> Campus.findAll().then(campus => {
         let completeArray = []
         for(let i = 0; i < campus.length; i++){
-            console.log(campusId)
+            console.log(campus.id)
         }
         res.status(200).json(campus);
       // projects will be an array of all Project instances
