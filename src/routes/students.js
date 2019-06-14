@@ -1,6 +1,6 @@
-const sequelize = require('../../sequelize')
-let db = sequelize[0]
-const Student = require("../../src/models/StudentModel")(db)
+const models= require('../models/index')
+const Student=models[0]
+const Campus=models[1]
 
 // Read of CRUD
 let allStudents = (req, res) => {
@@ -50,12 +50,16 @@ let createStudent = (req, res) => {
         lastName:lastName,
         email:email,
         imageUrl:imageUrl,
-        gpa:gpa
+        gpa:gpa,
+        campusId:schoolId
     })
     .then(student => {
         // addStudent(student.id, firstName, lastName, schoolId)
-        res.status(200).json(student);
-    });
+        res.status(200).send(student);
+    })
+    .catch(err => {
+            console.log(err);
+    })
 
 }
 
@@ -128,4 +132,4 @@ let routes = {
     changeSchool: changeEnrolledSchool
 }
 
-module.exports = routes
+module.exports=routes;

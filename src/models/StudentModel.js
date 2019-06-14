@@ -1,7 +1,5 @@
-module.exports = studentModel;
-
 const Sequelize = require('sequelize')
-function studentModel(sequelize) {
+module.exports =function studentModel(sequelize) {
     // const Campus = require("./CampusModel")(sequelize, Sequelize)
 
     class Students extends Sequelize.Model {}

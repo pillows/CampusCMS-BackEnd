@@ -1,17 +1,12 @@
-
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize(process.env.databaseURI, {
-	dialect:"postgres",
-	dialectOptions: {
-    	ssl: true,
-	},
-	logging: false
-});
-
-const Students = require("./StudentModel")(sequelize)
+const sequelize = new Sequelize('postgres://lulylais:0pMYbvDCzD64DklyVmSZqql9n7HRqzTt@raja.db.elephantsql.com:5432/lulylais');
+const Students =  require("./StudentModel")(sequelize)
 const Campus = require("./CampusModel")(sequelize)
 
 Students.belongsTo(Campus)
 Campus.hasMany(Students)
 
-Sequelize.sync()
+sequelize.sync()
+
+console.log('exporting the models',Students)
+module.exports=[Students,Campus];

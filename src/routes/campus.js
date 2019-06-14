@@ -1,8 +1,6 @@
-const sequelize = require('../../sequelize')
-let db = sequelize[0]
-
-const Student = require("../../src/models/StudentModel")(db)
-const Campus = require("../../src/models/CampusModel")(db)
+const models= require('../models/index')
+const Student=models[0]
+const Campus=models[1]
 
 let allCampuses = (req, res) => {
     Campus.findAll({
@@ -117,7 +115,6 @@ let removeStudent = (req, res) => {
 }
 
 
-
 let routes = {
     all: allCampuses,
     find: findCampus,
@@ -128,4 +125,4 @@ let routes = {
     removeStudent:removeStudent
 }
 
-module.exports = routes
+module.exports = routes;

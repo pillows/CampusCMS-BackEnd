@@ -2,7 +2,6 @@ const routes = require('express').Router();
 const students = require('./students')
 const campuses = require('./campus')
 
-
 routes.get('/', (req, res) => {
   res.status(200).json({ message: 'Connected!' });
 });
@@ -11,7 +10,7 @@ routes.get('/campuses', campuses.all);
 routes.get('/campuses/:id', campuses.find);
 routes.post('/campuses/create', campuses.create);
 routes.delete('/campuses/delete', campuses.delete);
-routes.put('/campuses/update', campuses.update)
+routes.put('/campuses/update', campuses.update);
 
 /*
 Lists all students in record
