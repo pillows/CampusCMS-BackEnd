@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('postgres://lulylais:0pMYbvDCzD64DklyVmSZqql9n7HRqzTt@raja.db.elephantsql.com:5432/lulylais');
+const sequelize = new Sequelize('postgres://lditjxoz:gLu4AqocSfBpEVrTcY1UvPjIM9HxyoYx@raja.db.elephantsql.com:5432/lditjxoz');
 const Students =  require("./StudentModel")(sequelize)
 const Campus = require("./CampusModel")(sequelize)
 

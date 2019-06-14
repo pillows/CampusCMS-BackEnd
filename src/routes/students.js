@@ -107,7 +107,6 @@ let changeEnrolledSchool = (req, res) => {
     console.log("student",studentId,"campus", campusId)
     Student.findOne({
         where:{id:studentId},
-        raw: true
     }).then((student) => {
         console.log(student)
         student.update({
