@@ -58,7 +58,7 @@ let createStudent = (req, res) => {
         res.status(200).send(student);
     })
     .catch(err => {
-            console.log(err);
+        res.status(400).send("error");
     })
 
 }
@@ -104,19 +104,19 @@ let changeEnrolledSchool = (req, res) => {
 
     let studentId = req.body.studentId
     let campusId = req.body.campusId
-    console.log("student",studentId,"campus", campusId)
+    // console.log("student",studentId,"campus", campusId)
     Student.findOne({
         where:{id:studentId},
     }).then((student) => {
-        console.log(student)
+        // console.log(student)
         student.update({
             campusId:campusId
         })
         res.status(200).json({status:"success"});
 
     }).catch((err)=>{
-        console.log(err)
-        res.status(400).json({status:"fuck u"});
+        // console.log(err)
+        res.status(400).json({status:"error"});
     })
 
     
