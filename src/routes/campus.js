@@ -5,7 +5,7 @@ const Campus=models[1]
 let allCampuses = (req, res) => {
     Campus.findAll({
         raw: true,
-        include:[{model:Student, as:'student'}]
+        include:[{model:Student, as:'students'}]
     }).then(campus => {
         let completeArray = []
         // for(let i = 0; i < campus.length; i++){
